@@ -37,7 +37,7 @@ class HashMap
     public:
     HashMap()
     {
-        capacity = 1007;
+        capacity = 10007;
         size = 0;
         hashTable = new HashNode<K,V>*[capacity];
 
