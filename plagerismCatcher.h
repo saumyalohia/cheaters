@@ -12,31 +12,25 @@
 
 using namespace std;
 template <typename K, typename V>
-//HashNode class
 class HashNode
 {
-    public:
-    V value;
+private:
     K key;
+    V value;
+    HashNode* next;
 
+public:
     HashNode(K key, V value)
     {
         this->value = value;
         this->key = key;
     }
-};
 
-template <typename K, typename V>
-class HashMap
-{
-    HashNode<K,V> **hashTable;
-    int capacity;
-    int size;
-    HashNode<K,V> *dummy;
-
-    public:
-    HashMap()
+    V getValue() const
     {
+<<<<<<< HEAD
+        return this->value;
+=======
         capacity = 10007;
         size = 0;
         hashTable = new HashNode<K,V>*[capacity];
@@ -46,92 +40,50 @@ class HashMap
         {
             hashTable[i] = NULL;
         }
+>>>>>>> d83964ef0d3c9212f0a102fdb99aea6d1b72bf2b
     }
 
-    int hashCode(K key)
+};
+
+
+template <typename K, typename V>
+class HashTable
+{
+private:
+    static const int TABLE_SIZE = 1007;
+    HashNode<K,V> **table;
+
+public:
+    HashTable()
     {
-        return key % capacity;
-    }
-
-    void insertNode(K key, V value)
-    {
-        HashNode<K,V> *temp = new HashNode<K,V>(key,value);
-
-        int hashIndex = hashCode(key);
-
-        while(hashTable[hashIndex] != NULL && hashTable[hashIndex]->key != key && hashTable[hashIndex]->key != -1)
+        table = new HashNode<K,V>[TABLE_SIZE];
+        for(int i=0; i<TABLE_SIZE; i++)
         {
-            hashIndex++;
-            hashIndex %= capacity;
-        }
-
-        if(hashTable[hashIndex] == NULL || hashTable[hashIndex]->key == -1)
-        {
-            size++;
-            hashTable[hashIndex] = temp;
+            table[i] = NULL;
         }
     }
 
-    V deleteNode(int key)
-    {
-        /*int hashIndex = hashCode(key);
+    V get(K key){}
 
-        while(hashTable[hashIndex] != NULL)
+    int hashCode(K key){}
+
+    void addNode(K key, V value){}
+
+    void removeNode(K key){}
+
+    bool isEmpty(){}
+
+    ~HashTable()
+    {
+        for(int i =0; i<TABLE_SIZE; i++)
         {
-            if(hashTable[hashIndex]->key == key)
+            if(table[i] != NULL)
             {
-                HashNode<K,V> *temp = hashTable[hashIndex];
-            }
-        }*/
-    }
-
-    V get(int key)
-    {
-        int hashIndex = hashCode(key);
-        int counter = 0;
-
-        while(hashTable[hashIndex] != NULL)
-        {
-            int counter = 0;
-
-            if(counter++ > capacity)
-            {
-                return NULL;
-            }
-
-            if(hashTable[hashIndex]->key == key)
-            {
-                return hashTable[hashIndex]->value;
-            }
-
-            hashIndex++;
-            hashIndex %= capacity;
-        }
-
-        return NULL;
-    }
-
-    int sizeofMap()
-    {
-        return size;
-    }
-
-    bool isEmpty()
-    {
-        return size == 0;
-    }
-
-    void display()
-    {
-        for(int i=0; i<capacity; i++)
-        {
-            if(hashTable[i] != NULL && hashTable[i]->key != -1)
-            {
-                cout << "key = " << hashTable[i]->key << " value = " << hashTable[i]->value << endl;
+                delete table[i];
             }
         }
+        delete table;
     }
-
 };
 
 #endif
