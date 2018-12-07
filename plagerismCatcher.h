@@ -28,21 +28,8 @@ public:
 
     V getValue() const
     {
-<<<<<<< HEAD
         return this->value;
-=======
-        capacity = 10007;
-        size = 0;
-        hashTable = new HashNode<K,V>*[capacity];
-
-        // initialize hash table
-        for(int i=0; i<capacity; i++)
-        {
-            hashTable[i] = NULL;
-        }
->>>>>>> d83964ef0d3c9212f0a102fdb99aea6d1b72bf2b
     }
-
 };
 
 
